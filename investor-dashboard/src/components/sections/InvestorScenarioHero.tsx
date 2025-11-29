@@ -11,17 +11,11 @@ import {
     PLANS as MODEL_PLANS,
     SCENARIOS,
     PROJECT_IRR_BASE,
-    TOTAL_EQUITY_POOL,
-    RESIDENT_REFUND_LIABILITY,
-    FINANCIAL_ASSETS_YEAR15,
     getTotalCommitment,
-    getTotalCashDistributions,
-    getResidualValue,
     getEconomicValueYear15,
     getMoneyMultiple,
     getEquityStakePct,
     getSafetyBufferShare,
-    getStrategicSaleProceeds,
     getStrategicSaleTotalValue,
     type PlanType,
     type ScenarioId,
@@ -96,7 +90,7 @@ export const InvestorScenarioHero: React.FC<InvestorScenarioHeroProps> = ({
 }) => {
     // Scenario state (replaces isShutdown)
     const [scenario, setScenario] = useState<ScenarioId>('base');
-    const [saleMultiple, setSaleMultiple] = useState<SaleMultiple>('10x');
+    const saleMultiple: SaleMultiple = '10x';  // Default, will add selector UI later
 
     const planUI = PLAN_UI_DATA[selectedPlan];
     const planModel = MODEL_PLANS[selectedPlan];
@@ -104,8 +98,6 @@ export const InvestorScenarioHero: React.FC<InvestorScenarioHeroProps> = ({
     // Calculate scenario-aware metrics
     const totalCommitment = getTotalCommitment(planModel, lots);
     const equityStakePct = getEquityStakePct(planModel, lots);
-    const totalCashDistributions = getTotalCashDistributions(planModel, lots);
-    const residualValue = getResidualValue(planModel, lots);
 
     // Scenario-specific calculations
     let roiYear15: number;
